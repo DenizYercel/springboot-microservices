@@ -1,5 +1,6 @@
 package com.denizyercel.employeeservice.controller;
 
+import com.denizyercel.employeeservice.dto.APIResponseDto;
 import com.denizyercel.employeeservice.dto.EmployeeDto;
 import com.denizyercel.employeeservice.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -21,8 +22,8 @@ public class EmployeeController {
     }
 
     @GetMapping("{employeeId}")
-    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("employeeId") Long employeeId){
-        EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
-        return new ResponseEntity<>(employeeDto,HttpStatus.OK);
+    public ResponseEntity<APIResponseDto> getEmployee(@PathVariable("employeeId") Long employeeId){
+        APIResponseDto apiResponseDto = employeeService.getEmployeeById(employeeId);
+        return new ResponseEntity<>(apiResponseDto,HttpStatus.OK);
     }
 }
