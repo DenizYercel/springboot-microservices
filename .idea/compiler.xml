@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="service-registry" />
       </profile>
       <profile name="Annotation profile for employee-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -27,6 +28,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="department-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
+      <module name="service-registry" options="-parameters" />
     </option>
   </component>
 </project>
