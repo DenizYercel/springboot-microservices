@@ -6,6 +6,7 @@ import com.denizyercel.employeeservice.dto.EmployeeDto;
 import com.denizyercel.employeeservice.entity.Employee;
 import com.denizyercel.employeeservice.mapper.AutoEmployeeMapper;
 import com.denizyercel.employeeservice.repository.EmployeeRepository;
+import com.denizyercel.employeeservice.service.APIClient;
 import com.denizyercel.employeeservice.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
-   // private RestTemplate restTemplate;
-    private WebClient webClient;
+    // private RestTemplate restTemplate;
+    //private WebClient webClient;
+    private APIClient apiClient;
 
     @Override
     public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
@@ -38,11 +40,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 //
 //        DepartmentDto departmentDto = responseEntity.getBody();
 
-        DepartmentDto departmentDto = webClient.get()
-                .uri("http://localhost:8080/api/departments/" + employee.getDepartmentCode())
-                .retrieve()
-                .bodyToMono(DepartmentDto.class)
-                .block();
+//        DepartmentDto departmentDto = webClient.get()
+//                .uri("http://localhost:8080/api/departments/" + employee.getDepartmentCode())
+//                .retrieve()
+//                .bodyToMono(DepartmentDto.class)
+//                .block();
+
+        DepartmentDto departmentDto = apiClient.getDepartment(employee.getDepartmentCode());
 
         APIResponseDto apiResponseDto = new APIResponseDto();
 
