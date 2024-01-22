@@ -24,4 +24,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 
         return savedOrganizationDto;
     }
+
+    @Override
+    public OrganizationDto getOrganizationByCode(String organizationCode) {
+        Organization organization = organizationRepository.findByOrganizationCode(organizationCode);
+        return AutoOrganizationMapper.MAPPER.mapToOrganizationDto(organization);
+    }
 }

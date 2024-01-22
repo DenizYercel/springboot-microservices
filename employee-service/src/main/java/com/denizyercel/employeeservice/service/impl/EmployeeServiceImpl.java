@@ -3,6 +3,7 @@ package com.denizyercel.employeeservice.service.impl;
 import com.denizyercel.employeeservice.dto.APIResponseDto;
 import com.denizyercel.employeeservice.dto.DepartmentDto;
 import com.denizyercel.employeeservice.dto.EmployeeDto;
+import com.denizyercel.employeeservice.dto.OrganizationDto;
 import com.denizyercel.employeeservice.entity.Employee;
 import com.denizyercel.employeeservice.mapper.AutoEmployeeMapper;
 import com.denizyercel.employeeservice.repository.EmployeeRepository;
@@ -58,10 +59,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //DepartmentDto departmentDto = apiClient.getDepartment(employee.getDepartmentCode());
 
+        OrganizationDto organizationDto = webClient.get()
+                .uri("http://localhost:8083/api/organizations/" + employee.getOrganizationCode())
+                .retrieve()
+                .bodyToMono(OrganizationDto.class)
+                .block();
+
         APIResponseDto apiResponseDto = new APIResponseDto();
 
         apiResponseDto.setEmployeeDto(AutoEmployeeMapper.MAPPER.maptoEmployeeDto(employee));
         apiResponseDto.setDepartmentDto(departmentDto);
+        apiResponseDto.setOrganizationDto(organizationDto);
         return apiResponseDto;
     }
 
